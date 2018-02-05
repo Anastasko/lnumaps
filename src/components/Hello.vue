@@ -15,7 +15,7 @@ export default {
   },
   mounted () {
     let that = this
-    d3.xml(config.host + '/uploads/maps/main_f1.svg',
+    d3.xml(config.host + '/uploads/maps/main_f2.svg',
       function (error, documentFragment) {
         if (error) {
           console.log(error)

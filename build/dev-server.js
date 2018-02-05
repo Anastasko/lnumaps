@@ -1,7 +1,7 @@
 'use strict'
 
 require('./check-versions')()
-
+const cors = require('cors')
 const config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -23,6 +23,7 @@ const autoOpenBrowser = !!config.dev.autoOpenBrowser
 const proxyTable = config.dev.proxyTable
 
 const app = express()
+app.use(cors())
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
