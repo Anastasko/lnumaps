@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     Components
-
+{{$store.state.count}}
     <form-input label="Input" v-model="model.input"> </form-input>
 
     <form-checkbox label="Checkbox" v-model="model.checkbox"> </form-checkbox>
