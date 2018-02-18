@@ -11,6 +11,18 @@ const store = new Vuex.Store({
   modules: {
     cityItem: CityItemModule
   },
+  getters: {
+    markers (state) {
+      return state.cityItem.data.map(item => ({
+        id: item.id,
+        position: {
+          lng: item.longitude,
+          lat: item.latitude
+        },
+        infoText: item.name
+      }))
+    }
+  },
   mutations: {
     search (state, payload) {
       state.search = payload

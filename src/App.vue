@@ -11,16 +11,18 @@
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
+        <md-toolbar class="md-transparent" md-elevation="0">
+          <h5 class="md-title">LNU Compass</h5>
+        </md-toolbar>
 
         <md-list>
           <md-list-item>
-            <md-icon>move_to_inbox</md-icon>
+            <md-icon>pin_drop</md-icon>
             <span class="md-list-item-text">Місто</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>send</md-icon>
+            <md-icon>business</md-icon>
             <span class="md-list-item-text">Корпуси</span>
           </md-list-item>
 

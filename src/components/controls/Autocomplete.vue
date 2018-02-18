@@ -1,6 +1,6 @@
 <template>
 
-  <md-autocomplete :value="findSelected" @md-changed="changed" @md-selected="selected1" :md-options="options">
+  <md-autocomplete :value="findSelected" @md-changed="changed" @md-selected="selected1" :md-options="options" md-dense>
     <label>{{label}}</label>
 
     <template slot="md-autocomplete-item" slot-scope="{ item, term }">
