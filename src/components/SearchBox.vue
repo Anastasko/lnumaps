@@ -6,7 +6,7 @@
       <md-icon>search</md-icon>
     </md-button>
 
-    <Autocomplete v-if="search" :options="[]" class="search-box"></Autocomplete>
+    <Autocomplete v-if="search" :options="$store.state.search" class="search-box"></Autocomplete>
 
   </div>
 

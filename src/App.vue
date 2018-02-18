@@ -48,7 +48,6 @@
 </style>
 
 <script>
-import config from '@/config'
 import SearchBox from './components/SearchBox'
 
 export default {
@@ -56,13 +55,6 @@ export default {
   data: () => ({
     menuVisible: false
   }),
-  created () {
-    fetch(config.api)
-      .then(response => response.json())
-      .then(t => {
-        this.tss = t
-      })
-  },
   components: {
     'search-box': SearchBox
   }

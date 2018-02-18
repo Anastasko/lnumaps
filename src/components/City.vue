@@ -17,6 +17,11 @@ export default {
         lng: 24.021
       }
     }
+  },
+  created () {
+    this.$store.dispatch('search', {
+      context: 'cityItem'
+    })
   }
 }
 </script>
