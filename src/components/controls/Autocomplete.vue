@@ -8,7 +8,8 @@
     </template>
 
     <template slot="md-autocomplete-empty" slot-scope="{ term }">
-      No items matching "{{ term }}" were found. <a @click="createNew(term)">Create a new</a> one!
+      No items matching "{{ term }}" were found.
+      <span v-if="createLink"> <a @click="createNew(term)" href="#">Create a new</a> one! </span>
     </template>
 
   </md-autocomplete>
@@ -17,7 +18,7 @@
 
 <script>
 export default {
-  props: ['value', 'label', 'options'],
+  props: ['value', 'label', 'options', 'createLink'],
   data: function () {
     return {
       selected: this.value

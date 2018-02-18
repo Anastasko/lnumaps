@@ -5,7 +5,9 @@
         <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
           <md-icon>menu</md-icon>
         </md-button>
-        <span class="md-title">Головний корпус</span>
+
+        <search-box></search-box>
+
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
@@ -14,23 +16,14 @@
         <md-list>
           <md-list-item>
             <md-icon>move_to_inbox</md-icon>
-            <span class="md-list-item-text">Поверх 1</span>
+            <span class="md-list-item-text">Місто</span>
           </md-list-item>
 
           <md-list-item>
             <md-icon>send</md-icon>
-            <span class="md-list-item-text">Поверх 2</span>
+            <span class="md-list-item-text">Корпуси</span>
           </md-list-item>
 
-          <md-list-item>
-            <md-icon>delete</md-icon>
-            <span class="md-list-item-text">Поверх 3</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Поверх 4</span>
-          </md-list-item>
         </md-list>
       </md-app-drawer>
 
@@ -56,6 +49,8 @@
 
 <script>
 import config from '@/config'
+import SearchBox from './components/SearchBox'
+
 export default {
   name: 'Reveal',
   data: () => ({
@@ -67,6 +62,9 @@ export default {
       .then(t => {
         this.tss = t
       })
+  },
+  components: {
+    'search-box': SearchBox
   }
 }
 </script>
