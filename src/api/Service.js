@@ -14,6 +14,10 @@ export default class Service {
     return request('GET', this.url + '/' + id)
   }
 
+  findMany (ids) {
+    return request('POST', this.url, ids)
+  }
+
   findAll () {
     return request('GET', this.url)
   }
