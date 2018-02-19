@@ -6,6 +6,7 @@
     class="my-map"
     @click="info.open = false">
       <gmap-info-window :options="info.options" :position="info.pos" :opened="info.open" @closeclick="info.open=false">
+        <md-icon class="goto">input</md-icon>
         {{info.content}}
       </gmap-info-window>
       <gmap-marker
@@ -64,4 +65,12 @@ export default {
   width: 100%;
   height: calc(100vh - 48px)
 }
+.my-map .goto {
+  opacity: 0.5;
+}
+.my-map .goto:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+.gm-style-iw + div {display: none;}
 </style>

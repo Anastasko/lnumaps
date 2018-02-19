@@ -16,15 +16,19 @@
         </md-toolbar>
 
         <md-list>
-          <md-list-item href="/city">
-            <md-icon>pin_drop</md-icon>
-            <span class="md-list-item-text">Місто</span>
-          </md-list-item>
+          <router-link to="city">
+            <md-list-item href="#">
+              <md-icon>pin_drop</md-icon>
+              <span class="md-list-item-text">Місто</span>
+            </md-list-item>
+          </router-link>
 
-          <md-list-item href="/corps">
-            <md-icon>business</md-icon>
-            <span class="md-list-item-text">Корпуси</span>
-          </md-list-item>
+          <router-link to="corps">
+            <md-list-item href="#">
+              <md-icon>business</md-icon>
+              <span class="md-list-item-text">Корпуси</span>
+            </md-list-item>
+          </router-link>
 
         </md-list>
       </md-app-drawer>
