@@ -45,9 +45,15 @@
     width: 230px;
     max-width: 70vw;
   }
+  .md-app-toolbar {
+    min-height: 48px;
+  }
   .md-app-content {
     padding: 0;
     height: calc(100vh - 48px)
+  }
+  .md-toolbar-section-end {
+    height: 48px;
   }
 </style>
 
