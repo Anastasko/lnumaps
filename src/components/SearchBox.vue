@@ -18,7 +18,7 @@ import Autocomplete from './controls/Autocomplete'
 export default {
   data () {
     return {
-      search: !false
+      search: false
     }
   },
   components: {

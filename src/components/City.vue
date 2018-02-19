@@ -62,6 +62,6 @@ export default {
 }
 .my-map {
   width: 100%;
-  height: calc(100vh - 50px)
+  height: calc(100vh - 48px)
 }
 </style>

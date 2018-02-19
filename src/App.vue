@@ -16,12 +16,12 @@
         </md-toolbar>
 
         <md-list>
-          <md-list-item>
+          <md-list-item href="/city">
             <md-icon>pin_drop</md-icon>
             <span class="md-list-item-text">Місто</span>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item href="/corps">
             <md-icon>business</md-icon>
             <span class="md-list-item-text">Корпуси</span>
           </md-list-item>
@@ -29,7 +29,7 @@
         </md-list>
       </md-app-drawer>
 
-      <md-app-content>
+      <md-app-content class="app-content">
         <router-view></router-view>
         <loading v-if="$store.state.loading"></loading>
       </md-app-content>
@@ -47,6 +47,7 @@
   }
   .md-app-content {
     padding: 0;
+    height: calc(100vh - 48px)
   }
 </style>
 
