@@ -31,6 +31,7 @@
 
       <md-app-content>
         <router-view></router-view>
+        <loading v-if="$store.state.loading"></loading>
       </md-app-content>
     </md-app>
   </div>
@@ -51,6 +52,7 @@
 
 <script>
 import SearchBox from './components/SearchBox'
+import Loading from './components/Loading'
 
 export default {
   name: 'Reveal',
@@ -58,7 +60,8 @@ export default {
     menuVisible: false
   }),
   components: {
-    'search-box': SearchBox
+    'search-box': SearchBox,
+    'loading': Loading
   }
 }
 </script>
