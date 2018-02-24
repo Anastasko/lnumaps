@@ -25,6 +25,10 @@ export default function (path) {
         let data = await api.findAll()
         commit('setData', data)
         return state.data
+      },
+      async find ({ commit, state }, id) {
+        let data = await api.findOne(id)
+        return data
       }
     }
   }

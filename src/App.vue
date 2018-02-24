@@ -70,6 +70,9 @@ export default {
   data: () => ({
     menuVisible: false
   }),
+  created () {
+    this.$store.dispatch('domain/fetch')
+  },
   components: {
     'search-box': SearchBox,
     'loading': Loading

@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import api from '@/api'
 import UniversalModuleFactory from './modules/universal'
 
 const CityItemModule = UniversalModuleFactory('cityItem')
 const MapModule = UniversalModuleFactory('map')
+const DomainModule = UniversalModuleFactory('domain.json')
 
 Vue.use(Vuex)
 
@@ -15,7 +15,8 @@ const store = new Vuex.Store({
   },
   modules: {
     cityItem: CityItemModule,
-    map: MapModule
+    map: MapModule,
+    domain: DomainModule
   },
   getters: {
     loading (state) {
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
         },
         infoText: item.name
       }))
+    },
+    domain (state) {
+      return state.domain.data
     }
   },
   mutations: {
@@ -49,10 +53,6 @@ const store = new Vuex.Store({
       await dispatch(ctx + '/fetch')
       let data = state[ctx].data.map(d => ({id: d.id, text: d.name}))
       commit('search', data)
-    },
-    async fetchMaps () {
-      let maps = await api['map'].findAll()
-      console.log(maps)
     }
   }
 })
