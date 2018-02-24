@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '@/api'
-import CityItemModule from './modules/cityItem'
+import UniversalModuleFactory from './modules/universal'
+
+const CityItemModule = UniversalModuleFactory('cityItem')
+const MapModule = UniversalModuleFactory('map')
 
 Vue.use(Vuex)
 
@@ -11,7 +14,8 @@ const store = new Vuex.Store({
     pendingRequests: 0
   },
   modules: {
-    cityItem: CityItemModule
+    cityItem: CityItemModule,
+    map: MapModule
   },
   getters: {
     loading (state) {

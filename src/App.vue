@@ -16,14 +16,14 @@
         </md-toolbar>
 
         <md-list>
-          <router-link to="city">
+          <router-link to="/city">
             <md-list-item href="#">
               <md-icon>pin_drop</md-icon>
               <span class="md-list-item-text">Місто</span>
             </md-list-item>
           </router-link>
 
-          <router-link to="corps">
+          <router-link to="/corps">
             <md-list-item href="#">
               <md-icon>business</md-icon>
               <span class="md-list-item-text">Корпуси</span>
