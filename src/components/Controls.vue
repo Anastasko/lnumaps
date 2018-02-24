@@ -1,9 +1,7 @@
 <template>
   <div class="box">
-    Components
-{{$store.state.count}}
 
-<button @click="$store.dispatch('fetchMaps')"> GO </button>
+    Controls
 
     <form-input label="Input" v-model="model.input"> </form-input>
 
@@ -11,8 +9,8 @@
 
     <form-autocomplete label="Autocomplete" v-model="model.autocomplete.data" :options="model.autocomplete.options"></form-autocomplete>
 
+    <pre>{{model}}</pre>
 
-<pre>{{model}}</pre>
   </div>
 </template>
 

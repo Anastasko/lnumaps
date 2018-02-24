@@ -6,7 +6,9 @@
     class="my-map"
     @click="info.open = false">
       <gmap-info-window :options="info.options" :position="info.pos" :opened="info.open" @closeclick="info.open=false">
-        <md-icon class="goto">input</md-icon>
+        <router-link :to="`cityItem/${info.id}`">
+            <md-icon class="goto">input</md-icon>
+        </router-link>
         {{info.content}}
       </gmap-info-window>
       <gmap-marker
@@ -31,8 +33,9 @@ export default {
       },
       info: {
         open: false,
-        content: '',
+        id: null,
         pos: null,
+        content: '',
         options: {
           pixelOffset: {
             width: 0,
@@ -49,8 +52,9 @@ export default {
   },
   methods: {
     toggleInfoWindow (m) {
-      this.info.pos = m.position
       this.info.open = true
+      this.info.pos = m.position
+      this.info.id = m.id
       this.info.content = m.infoText
     }
   }

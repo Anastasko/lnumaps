@@ -7,7 +7,7 @@ async function request (method, url, data) {
   try {
     response = await fetch(url, { method, data })
   } finally {
-    store.commit('requestCompleted')
+    setTimeout(() => store.commit('requestCompleted'), 0)
   }
   return response.json()
 }

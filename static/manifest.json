@@ -1,6 +1,6 @@
 {
-  "name": "lnumaps-vue",
-  "short_name": "lnumaps-vue",
+  "name": "LNU Maps",
+  "short_name": "LNU Maps",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",
