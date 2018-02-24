@@ -5,5 +5,5 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  HOST_ENV: '"http://lnumaps.ddns.net:8081"'
+  HOST_ENV: '"http://localhost:8080"'
 })

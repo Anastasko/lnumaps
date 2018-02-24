@@ -1,7 +1,14 @@
 import config from '@/config'
+import store from '@/store'
 
 async function request (method, url, data) {
-  let response = await fetch(url, { method, data })
+  store.commit('requestStarted')
+  let response = null
+  try {
+    response = await fetch(url, { method, data })
+  } finally {
+    store.commit('requestCompleted')
+  }
   return response.json()
 }
 

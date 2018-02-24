@@ -35,7 +35,7 @@
 
       <md-app-content class="app-content">
         <router-view></router-view>
-        <loading v-if="$store.state.loading"></loading>
+        <loading v-if="$store.getters.loading"></loading>
       </md-app-content>
     </md-app>
   </div>
