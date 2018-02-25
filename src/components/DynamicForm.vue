@@ -2,7 +2,6 @@
 
 <div style="padding: 10px">
 
-
     <form novalidate class="md-layout" @submit.prevent="validate">
         <md-card class="md-layout-item md-size-50 md-small-size-100">
           <md-card-header>
@@ -12,7 +11,7 @@
           <md-card-content>
 
             <div v-for="field in fields" :key="field.id">
-              <component :is="input(field)" v-bind="inputData(field)" v-model="item[field.name]"></component>
+              <component :is="input(field)" v-model="item[field.name]" v-bind="inputData(field)"></component>
             </div>
 
           </md-card-content>
@@ -37,6 +36,7 @@ import { mapGetters } from 'vuex'
 import Input from './controls/Input'
 import Checkbox from './controls/Checkbox'
 import Autocomplete from './controls/Autocomplete'
+import deepClone from '../utils/deepClone'
 
 export default {
   props: ['typeName', 'title', 'id'],
@@ -47,7 +47,8 @@ export default {
   }),
   async created () {
     if (this.id) {
-      this.item = await this.$store.dispatch(this.typeName + '/find', {id: this.id})
+      let item = await this.$store.dispatch(this.typeName + '/find', {id: this.id})
+      this.item = deepClone(item)
     }
   },
   computed: {
@@ -77,13 +78,20 @@ export default {
         label: field.label
       }
       if (!this.primitive(field.type)) {
-        data.options = []
+        let typeName = this.findType(field.type).name
+        data.options = this.$store.dispatch(typeName + '/fetch')
+          .then(items => items.map(item => ({
+            id: item.id,
+            text: item.name || '#' + item.id
+          })))
       }
       return data
     },
+    findType (arg) {
+      return this.domain.find(t => t.id === arg.id)
+    },
     primitive (arg) {
-      let x = this.domain.find(t => t.id === arg.id)
-      return x.kind === 'PRIMITIVE'
+      return this.findType(arg).kind === 'PRIMITIVE'
     },
     post () {
       this.sending = true

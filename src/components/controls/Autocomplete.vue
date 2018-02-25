@@ -1,6 +1,6 @@
 <template>
 
-  <md-autocomplete :value="findSelected" @md-changed="changed" @md-selected="select" :md-options="options" md-dense>
+  <md-autocomplete :value="findSelected" @md-changed="changed" @md-selected="select" :md-options="options || []" md-dense :md-fuzzy-search="false">
     <label>{{label}}</label>
 
     <template slot="md-autocomplete-item" slot-scope="{ item, term }">
@@ -21,14 +21,23 @@ export default {
   props: ['value', 'label', 'options', 'createLink'],
   data: function () {
     return {
-      selected: this.value
+      selected: null,
+      loadedOptions: []
     }
+  },
+  created () {
+    this.options.then(x => {
+      this.loadedOptions = x
+    })
+  },
+  mounted () {
+    console.log(this.value)
   },
   computed: {
     findSelected () {
       let result = ''
       if (this.selected) {
-        this.options.forEach(o => {
+        this.loadedOptions.forEach(o => {
           if (o.id === this.selected.id) {
             result = o.text
           }
@@ -52,6 +61,7 @@ export default {
       }
     },
     changed (text) {
+      console.log('changed')
       if (!text) {
         this.selected = null
       }

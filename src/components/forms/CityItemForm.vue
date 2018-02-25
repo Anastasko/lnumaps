@@ -1,7 +1,7 @@
 <template>
 
 <div>
-  <dynamic-form typeName="cityItem" title="Form" :id="id"></dynamic-form>
+  <dynamic-form typeName="cityItem" title="Форма" :id="id"></dynamic-form>
 </div>
 
 </template>
