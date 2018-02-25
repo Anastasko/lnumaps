@@ -1,5 +1,5 @@
 <template>
-  <div ref="map" id="map">
+  <div ref="map" class="my-map" id="map">
 
   </div>
 </template>
@@ -49,6 +49,6 @@ export default {
 
 <style>
 #map {
-  height: 90vh;
+  height: calc(100vh - 48px);
 }
 </style>

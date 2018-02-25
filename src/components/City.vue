@@ -52,17 +52,26 @@ export default {
   computed: {
     ...mapGetters(['markers'])
   },
-  created () {
-    this.$store.dispatch('search', {
+  async created () {
+    await this.$store.dispatch('search', {
       context: 'cityItem'
     })
     this.$store.watch(state => state.searchSelected, (selected) => {
       if (selected) {
-        let marker = this.markers.find(m => m.id === selected.id)
-        this.center = marker.position
-        this.openInfoWindow(marker)
+        this.$router.push({ path: `/city/${selected.id}` })
       }
     })
+    let id = this.$route.params.id
+    if (id) {
+      this.navigate({id})
+    }
+  },
+  watch: {
+    '$route.params': function (to) {
+      if (to.id) {
+        this.navigate(to)
+      }
+    }
   },
   methods: {
     openInfoWindow (m) {
@@ -70,6 +79,11 @@ export default {
       this.info.pos = m.position
       this.info.id = m.id
       this.info.content = m.infoText
+    },
+    navigate (selected) {
+      let marker = this.markers.find(m => m.id === +selected.id)
+      this.center = marker.position
+      this.openInfoWindow(marker)
     }
   }
 }
