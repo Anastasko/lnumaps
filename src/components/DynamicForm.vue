@@ -47,7 +47,7 @@ export default {
   }),
   async created () {
     if (this.id) {
-      this.item = await this.$store.dispatch(this.typeName + '/find', this.id)
+      this.item = await this.$store.dispatch(this.typeName + '/find', {id: this.id})
     }
   },
   computed: {

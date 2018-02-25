@@ -1,7 +1,7 @@
 <template>
 
   <gmap-map
-    :center="lviv"
+    :center="center"
     :zoom="15"
     class="my-map"
     @click="info.open = false">
@@ -13,24 +13,28 @@
       </gmap-info-window>
       <gmap-marker
         :key="index"
-        v-for="(m, index) in $store.getters.markers"
+        v-for="(m, index) in markers"
         :position="m.position"
         :clickable="true"
         :draggable="false"
-        @click="toggleInfoWindow(m)">
+        @click="openInfoWindow(m)">
       </gmap-marker>
   </gmap-map>
 
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   data () {
+    let lviv = {
+      lat: 49.838,
+      lng: 24.021
+    }
     return {
-      lviv: {
-        lat: 49.838,
-        lng: 24.021
-      },
+      lviv,
+      center: lviv,
       info: {
         open: false,
         id: null,
@@ -45,13 +49,23 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['markers'])
+  },
   created () {
     this.$store.dispatch('search', {
       context: 'cityItem'
     })
+    this.$store.watch(state => state.searchSelected, (selected) => {
+      if (selected) {
+        let marker = this.markers.find(m => m.id === selected.id)
+        this.center = marker.position
+        this.openInfoWindow(marker)
+      }
+    })
   },
   methods: {
-    toggleInfoWindow (m) {
+    openInfoWindow (m) {
       this.info.open = true
       this.info.pos = m.position
       this.info.id = m.id

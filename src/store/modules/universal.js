@@ -26,8 +26,15 @@ export default function (path) {
         commit('setData', data)
         return state.data
       },
-      async find ({ commit, state }, id) {
-        let data = await api.findOne(id)
+      async find ({ commit, state }, item) {
+        if (!item || !item.id) {
+          throw new Error('provide item.id for find.')
+        }
+        let cached = state.data.find(i => i.id === item.id)
+        if (cached) {
+          return cached
+        }
+        let data = await api.findOne(item.id)
         return data
       }
     }

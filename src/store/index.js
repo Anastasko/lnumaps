@@ -10,6 +10,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    searchSelected: null,
     search: [],
     pendingRequests: 0
   },
@@ -45,6 +46,9 @@ const store = new Vuex.Store({
     },
     requestCompleted (state) {
       state.pendingRequests -= 1
+    },
+    'search-box-selected': function (state, item) {
+      state.searchSelected = item
     }
   },
   actions: {

@@ -1,6 +1,6 @@
 <template>
 
-  <md-autocomplete :value="findSelected" @md-changed="changed" @md-selected="selected1" :md-options="options" md-dense>
+  <md-autocomplete :value="findSelected" @md-changed="changed" @md-selected="select" :md-options="options" md-dense>
     <label>{{label}}</label>
 
     <template slot="md-autocomplete-item" slot-scope="{ item, term }">
@@ -8,8 +8,8 @@
     </template>
 
     <template slot="md-autocomplete-empty" slot-scope="{ term }">
-      No items matching "{{ term }}" were found.
-      <span v-if="createLink"> <a @click="createNew(term)" href="#">Create a new</a> one! </span>
+      Нічого не знайдено для "{{ term }}".
+      <span v-if="createLink"> <a @click="createNew(term)" href="#">Створити новий</a>! </span>
     </template>
 
   </md-autocomplete>
@@ -46,7 +46,7 @@ export default {
     createNew (text) {
       console.log(text)
     },
-    selected1 (item) {
+    select (item) {
       this.selected = {
         id: item.id
       }

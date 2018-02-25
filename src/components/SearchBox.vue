@@ -6,7 +6,7 @@
       <md-icon>search</md-icon>
     </md-button>
 
-    <Autocomplete v-if="search" :options="$store.state.search" class="search-box"></Autocomplete>
+    <Autocomplete v-if="search" :options="$store.state.search" class="search-box" @input="selected"></Autocomplete>
 
   </div>
 
@@ -19,6 +19,11 @@ export default {
   data () {
     return {
       search: false
+    }
+  },
+  methods: {
+    selected (item) {
+      this.$store.commit('search-box-selected', item)
     }
   },
   components: {

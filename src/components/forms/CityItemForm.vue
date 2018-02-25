@@ -17,7 +17,7 @@ export default {
     id: null
   }),
   created () {
-    this.id = this.$route.params.id
+    this.id = +this.$route.params.id
   }
 }
 </script>
