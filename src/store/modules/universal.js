@@ -27,7 +27,13 @@ export default function (path) {
         return state.data
       },
       async find ({ commit, state }, item) {
-        if (!item || !item.id) {
+        if (!item) {
+          throw new Error('provide id for find.')
+        }
+        if ((typeof item === 'number') || (typeof item === 'string')) {
+          item = {id: item}
+        }
+        if (!item.id) {
           throw new Error('provide item.id for find.')
         }
         let cached = state.data.find(i => i.id === item.id)

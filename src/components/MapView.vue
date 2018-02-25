@@ -11,12 +11,16 @@ import config from '@/config'
 export default {
   data () {
     return {
+      map: null
     }
   },
-  mounted () {
+  async mounted () {
     let that = this
-    d3.xml(config.host + '/uploads/maps/main_f2.svg',
+    this.map = await this.$store.dispatch('map/find', this.$route.params.id)
+    this.$store.commit('requestStarted')
+    d3.xml(config.host + this.map.image.url,
       function (error, documentFragment) {
+        that.$store.commit('requestCompleted')
         if (error) {
           console.log(error)
           return
@@ -34,9 +38,7 @@ export default {
         .attr('width', '100%')
         .attr('height', '100%')
         .call(d3.zoom().on('zoom', function () {
-          // that.hideMenu = true;
           let transform = d3.event.transform
-          // that.transform = transform;
           that.svg.attr('transform', 'translate(' + transform.x + ',' + transform.y + ') scale(' + transform.k + ')')
           d3.selectAll('.map-item').attr('r', that.mapItemRadius / transform.k)
         })).append('g')

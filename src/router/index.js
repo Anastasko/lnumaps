@@ -24,7 +24,7 @@ export default new Router({
       path: '/corps',
       component: Maps
     }, {
-      path: '/map/:id/view',
+      path: '/map/view/:id',
       component: MapView
     }, {
       alias: '/cityItem/create',
