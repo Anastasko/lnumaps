@@ -11,20 +11,18 @@
         </router-link>
         {{info.content}}
       </gmap-info-window>
-      <gmap-marker
+      <map-marker v-for="(m, index) in markers"
+        :marker="m"
         :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        :clickable="true"
-        :draggable="false"
-        @click="choose(m, true)">
-      </gmap-marker>
+        @choose="choose(m, true)">
+      </map-marker>
   </gmap-map>
 
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import Marker from './Marker'
 
 export default {
   data () {
@@ -43,7 +41,7 @@ export default {
         options: {
           pixelOffset: {
             width: 0,
-            height: -35
+            height: -20
           }
         }
       }
@@ -96,6 +94,9 @@ export default {
       this.info.id = m.id
       this.info.content = m.infoText
     }
+  },
+  components: {
+    'map-marker': Marker
   }
 }
 </script>

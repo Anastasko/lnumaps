@@ -11,8 +11,8 @@
 
           <md-card-content>
 
-            <div v-for="field in type.fields" :key="field.id">
-              <form-input :label="field.label" v-model="item[field.name]"></form-input>
+            <div v-for="field in fields" :key="field.id">
+              <component :is="input(field)" v-bind="inputData(field)" v-model="item[field.name]"></component>
             </div>
 
           </md-card-content>
@@ -55,6 +55,9 @@ export default {
     type () {
       return this.domain.find(t => t.name === this.typeName) || {}
     },
+    fields () {
+      return (this.type.fields || []).filter(field => field.kind !== 'COLLECTION')
+    },
     submitButtonText () {
       if (!this.item) {
         return 'СТВОРИТИ'
@@ -63,6 +66,25 @@ export default {
     }
   },
   methods: {
+    input (field) {
+      if (this.primitive(field.type)) {
+        return 'form-input'
+      }
+      return 'form-autocomplete'
+    },
+    inputData (field) {
+      let data = {
+        label: field.label
+      }
+      if (!this.primitive(field.type)) {
+        data.options = []
+      }
+      return data
+    },
+    primitive (arg) {
+      let x = this.domain.find(t => t.id === arg.id)
+      return x.kind === 'PRIMITIVE'
+    },
     post () {
       this.sending = true
       this.saved = true

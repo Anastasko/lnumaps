@@ -64,14 +64,21 @@
 <script>
 import SearchBox from './components/SearchBox'
 import Loading from './components/Loading'
+import cachedDownloader from './utils/cachedDownloader'
 
 export default {
   name: 'Reveal',
   data: () => ({
     menuVisible: false
   }),
-  created () {
+  async created () {
     this.$store.dispatch('domain/fetch')
+    this.$store.dispatch('itemKind/fetch')
+    this.$store.dispatch('androidIcon/fetch').then(icons => {
+      icons.forEach(icon => {
+        cachedDownloader.download(icon.hdpi.url)
+      })
+    })
   },
   components: {
     'search-box': SearchBox,

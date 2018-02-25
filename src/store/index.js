@@ -5,11 +5,14 @@ import UniversalModuleFactory from './modules/universal'
 const CityItemModule = UniversalModuleFactory('cityItem')
 const MapModule = UniversalModuleFactory('map')
 const DomainModule = UniversalModuleFactory('domain.json')
+const ItemKindModule = UniversalModuleFactory('itemKind')
+const AndroidIconModule = UniversalModuleFactory('androidIcon')
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    showSearch: false,
     searchSelected: null,
     search: [],
     pendingRequests: 0
@@ -17,7 +20,9 @@ const store = new Vuex.Store({
   modules: {
     cityItem: CityItemModule,
     map: MapModule,
-    domain: DomainModule
+    domain: DomainModule,
+    itemKind: ItemKindModule,
+    androidIcon: AndroidIconModule
   },
   getters: {
     loading (state) {
@@ -30,7 +35,8 @@ const store = new Vuex.Store({
           lng: item.longitude,
           lat: item.latitude
         },
-        infoText: item.name
+        infoText: item.name,
+        kind: item.kind
       }))
     },
     domain (state) {
@@ -49,10 +55,17 @@ const store = new Vuex.Store({
     },
     'search-box-selected': function (state, item) {
       state.searchSelected = item
+    },
+    toggleSearch (state) {
+      state.showSearch = !state.showSearch
+    },
+    hideSearch (state) {
+      state.showSearch = false
     }
   },
   actions: {
     async search ({commit, state, dispatch}, context) {
+      commit('hideSearch')
       let ctx = context.context
       await dispatch(ctx + '/fetch')
       let data = state[ctx].data.map(d => ({id: d.id, text: d.name}))

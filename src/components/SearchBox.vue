@@ -2,11 +2,11 @@
 
   <div class="md-toolbar-section-end">
 
-    <md-button class="md-icon-button" @click="search = !search">
+    <md-button class="md-icon-button" @click="toggleSearch">
       <md-icon>search</md-icon>
     </md-button>
 
-    <Autocomplete v-if="search" :options="$store.state.search" class="search-box" @input="selected"></Autocomplete>
+    <Autocomplete v-if="$store.state.showSearch" :options="$store.state.search" class="search-box" @input="selected"></Autocomplete>
 
   </div>
 
@@ -24,6 +24,9 @@ export default {
   methods: {
     selected (item) {
       this.$store.commit('search-box-selected', item)
+    },
+    toggleSearch () {
+      this.$store.commit('toggleSearch')
     }
   },
   components: {
