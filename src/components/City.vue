@@ -6,7 +6,7 @@
     class="my-map"
     @click="info.open = false">
       <gmap-info-window :options="info.options" :position="info.pos" :opened="info.open" @closeclick="info.open=false">
-        <router-link :to="`cityItem/${info.id}`">
+        <router-link :to="`/cityItem/edit/${info.id}`">
             <md-icon class="goto">input</md-icon>
         </router-link>
         {{info.content}}
@@ -17,7 +17,7 @@
         :position="m.position"
         :clickable="true"
         :draggable="false"
-        @click="openInfoWindow(m)">
+        @click="choose(m, true)">
       </gmap-marker>
   </gmap-map>
 
@@ -58,7 +58,8 @@ export default {
     })
     this.$store.watch(state => state.searchSelected, (selected) => {
       if (selected) {
-        this.$router.push({ path: `/city/${selected.id}` })
+        let marker = this.markers.find(m => m.id === +selected.id)
+        this.choose(marker, false)
       }
     })
     let id = this.$route.params.id
@@ -68,22 +69,32 @@ export default {
   },
   watch: {
     '$route.params': function (to) {
-      if (to.id) {
+      if (to.id && !to.preventNavigation) {
         this.navigate(to)
       }
     }
   },
   methods: {
-    openInfoWindow (m) {
-      this.info.open = true
-      this.info.pos = m.position
-      this.info.id = m.id
-      this.info.content = m.infoText
+    choose (m, preventNavigation) {
+      this.openInfoWindow(m)
+      this.$router.push({
+        name: 'city',
+        params: {
+          id: m.id,
+          preventNavigation
+        }
+      })
     },
     navigate (selected) {
       let marker = this.markers.find(m => m.id === +selected.id)
       this.center = marker.position
       this.openInfoWindow(marker)
+    },
+    openInfoWindow (m) {
+      this.info.open = true
+      this.info.pos = m.position
+      this.info.id = m.id
+      this.info.content = m.infoText
     }
   }
 }

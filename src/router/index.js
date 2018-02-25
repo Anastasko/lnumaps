@@ -17,6 +17,7 @@ export default new Router({
       path: '/city',
       component: City
     }, {
+      name: 'city',
       path: '/city/:id',
       component: City
     }, {
@@ -26,7 +27,8 @@ export default new Router({
       path: '/map/:id/view',
       component: MapView
     }, {
-      path: '/cityItem/:id',
+      alias: '/cityItem/create',
+      path: '/cityItem/edit/:id',
       component: CityItemForm
     }, {
       path: '/controls',
