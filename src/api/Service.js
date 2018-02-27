@@ -1,4 +1,3 @@
-import config from '@/config'
 import store from '@/store'
 
 async function request (method, url, data) {
@@ -14,7 +13,7 @@ async function request (method, url, data) {
 
 export default class Service {
   constructor (prefix) {
-    this.url = config.api + '/' + prefix
+    this.url = '/api/' + prefix
   }
 
   findOne (id) {

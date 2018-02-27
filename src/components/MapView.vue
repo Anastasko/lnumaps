@@ -6,7 +6,6 @@
 
 <script>
 import * as d3 from 'd3'
-import config from '@/config'
 
 export default {
   data () {
@@ -18,7 +17,7 @@ export default {
     let that = this
     this.map = await this.$store.dispatch('map/find', this.$route.params.id)
     this.$store.commit('requestStarted')
-    d3.xml(config.host + this.map.image.url,
+    d3.xml(this.map.image.url,
       function (error, documentFragment) {
         that.$store.commit('requestCompleted')
         if (error) {
