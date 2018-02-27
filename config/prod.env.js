@@ -2,5 +2,5 @@
 
 module.exports = {
   NODE_ENV: '"production"',
-  HOST_ENV: '"http://lnumaps.ddns.net:8080"'
+  HOST_ENV: '"http://maps.lnu.edu.ua"'
 }
