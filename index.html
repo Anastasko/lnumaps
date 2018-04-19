@@ -6,6 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LNU Maps</title>
+<script type="text/javascript">
+window.onerror = function (message, url, lineNo, colNo, error) {
+  if (/bot|google|baidu|bing|msn|duckduckgo|teoma|slurp|yandex/i.test(navigator.userAgent)) { // crawler
+     console.log(arguments);
+     var container = document.createElement('div');
+     container.style.color = 'red';
+     container.style.position = 'fixed';
+     container.style.background = '#eee';
+     container.style.padding = '2em';
+     container.style.top = '1em';
+     container.style.left = '1em';
+     var msg = document.createElement('pre');
+     msg.innerText = [
+        'Message: ' + message,
+        'URL: ' + url,
+        'Line: ' + lineNo,
+        'Column: ' + colNo,
+        'Stack: ' + (error && error.stack)
+     ].join('\n');
+     container.appendChild(msg);
+     document.body.appendChild(container);
+  }
+};
+</script>
     <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
     <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
