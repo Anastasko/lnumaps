@@ -17,14 +17,14 @@
 
         <md-list>
           <router-link to="/city">
-            <md-list-item href="#">
+            <md-list-item href="/city">
               <md-icon>pin_drop</md-icon>
               <span class="md-list-item-text">Місто</span>
             </md-list-item>
           </router-link>
 
           <router-link to="/corps">
-            <md-list-item href="#">
+            <md-list-item href="/corps">
               <md-icon>business</md-icon>
               <span class="md-list-item-text">Корпуси</span>
             </md-list-item>
